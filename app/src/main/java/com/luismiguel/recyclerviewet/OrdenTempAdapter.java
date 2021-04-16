@@ -1,6 +1,8 @@
 package com.luismiguel.recyclerviewet;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +69,28 @@ public class OrdenTempAdapter extends RecyclerView.Adapter<OrdenTempAdapter.Orde
             tvPallet.setText(palletTemp.getNumePallet());
             tvTemperatura.setText(palletTemp.getTemperatura());
             checkboxCamara.setChecked(palletTemp.rutaPallet == 1 ? true: false);
+            checkboxCamara.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    palletTempModelList.get(getAdapterPosition()).rutaPallet = (checkboxCamara.isChecked() == true ? 1: 0);
+                }
+            });
+            tvTemperatura.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    palletTempModelList.get(getAdapterPosition()).temperatura = s.toString();
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
 
         }
     }
